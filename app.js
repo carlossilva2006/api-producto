@@ -4,29 +4,32 @@ const express = require('express'),
 //ahora invocamos controller aqui
   controlVerb = require('./Controller/verbs'),
         auth  = require('./middlewares/auth'),
-     userCtrl = require('./controllers/users')
+     userCtrl = require('./controllers/users'),
+          hbs = require('express-handlebars')
 
-app.use(bodyParser.urlencoded({extended :false}))
+app.use(bodyParser.urlencoded({extended :false}));
+app.use(bodyParser.json());
+app.engine('.hbs',hbs({   //configuración de plantilla
+  defaultLayout: 'default',
+  extname: '.hbs'
+}))
+app.set('views engine', '.hbs')
+app.get('/login',(req, res) => {
+  res.render('login')
+})
 
-app.use(bodyParser.json())
-
-app.get('/api/product', controlVerb.getProducts)
-
+app.get('/app/product', controlVerb.getProducts);
 // para acceder a un unico recurso
-app.get('/api/product/:productId', controlVerb.getProduct)
-
+app.get('/app/product/:productId', controlVerb.getProduct);
 // Parra crear nuevos registros
-app.post('/api/product', auth, controlVerb.postProduct)
-
-app.put('/api/product/:productId', auth, controlVerb.putProduct)
-
-app.delete('/api/product/:productId', auth, controlVerb.deleteProduct)
-
+app.post('/app/product', auth, controlVerb.postProduct);
+app.put('/app/product/:productId', auth, controlVerb.putProduct);
+app.delete('/app/product/:productId', auth, controlVerb.deleteProduct);
 app.get('/private', auth, (req, res) =>
 {  
-  res.status(200).send({message :'tienes acceso '})
+  res.status(200).send({message :'tienes acceso '});
 })
-app.post('/signup',userCtrl.signUp)
-app.post('/signin',userCtrl.signIn)
+app.post('/signup',userCtrl.signUp);
+app.post('/signin',userCtrl.signIn);
 
 module.exports = app

@@ -1,0 +1,23 @@
+<script type="text/javascript">
+
+let productoList = document.createElement('ul')
+
+    const myHeaders = new Headers();
+    myHeaders.append('authorization', `Beare ${localStorage.token}`)
+
+ fetch('/app/product',{
+         method:'GET',
+         body:myHeaders
+     })
+     .then(res => res.json())
+     .then(data => {
+         data.productos.map(product => {
+             let text = document.createTextNode(product.name)
+             let elem = document.createElement('li')
+             elem.appendChild(text)
+             productoList.appendChild(elem)
+         })
+         document.body.appendChild(productoList)
+     })
+     
+</script>

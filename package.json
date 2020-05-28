@@ -4,7 +4,8 @@
   "description": "ejercicio",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "index.js"
   },
   "author": "Carlos Silva",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "body-parser": "^1.19.0",
     "crypto": "^1.0.1",
     "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
     "jwt-simple": "^0.5.6",
     "moment": "^2.26.0",
     "mongoose": "^5.9.15",

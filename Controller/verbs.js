@@ -27,7 +27,7 @@ function getProduct(req, res) {
 }
 
 function postProduct (req, res) {
-    console.log('post/api/product');
+    console.log('post/app/product');
     console.log(req.body);
     //para almacenar un nuevo producto en la BD
     let product = new Producto();
