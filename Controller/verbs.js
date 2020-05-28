@@ -1,6 +1,6 @@
-const Producto = require('../models/productos');
+'use strict'
 
-
+const Producto = require('../models/productos')
 
 function getProducts (req, res) {
     Producto.find({}, (error, products) => {

@@ -1,21 +1,22 @@
-const mongoose = require('mongoose');
-const Shema    = mongoose.Schema;
+const mongoose = require('mongoose')
+ const     Shema    = mongoose.Schema,
 //para encriptar 
-const bcrypt   = require('bcrypt-nodejs');
-const cryto    = require('crypto');
-// para crear el esquema
-const UserShema = new Schema({
-    email       : { type : String, unique:true, lowercase:true },
+      bcrypt   = require('bcrypt-nodejs'), // libreria para encriptar contraseñas
+      cryto    = require('crypto')
+
+// para crear el esquema en la base de datos 
+const UserShema = new Shema({
+    email       : { type : String, unique:true, lowercase:true }, 
     displayName : String,
     avatar      : String,
     password    : { type : String, select : false },
-    signupDate  : {type : Date, default : Date.now() },
+    signupDate  : {type : Date, default : Date.now() }, // nos dara la fecha en la que haga su usuario
     lastLogin   : Date 
 })
 
 // creamos una función en mongo antes que se ejecute para que este la encripte
 // le decimos antes que se save en post ejecute la sgte instruccion
-UserShema.pre('save', (next) => {
+UserShema.pre('save', (next) => {   
 
     let user = this
     if (!user.isModified('password')) return next()
